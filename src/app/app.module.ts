@@ -4,8 +4,6 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { TodoComponent } from './components/todo/todo.component';
-import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
 
 @NgModule({
   declarations: [
@@ -21,16 +19,10 @@ import { Component } from '@angular/core';
 })
 export class AppModule { }
 
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
-})
 
 export class TaskComponent {
   title = 'Todo Task List';
 
-  constructor(private http: HttpClient) {}
 
   
 }
