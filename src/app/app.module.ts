@@ -32,9 +32,5 @@ export class TaskComponent {
 
   constructor(private http: HttpClient) {}
 
-  callPlayRoute() {
-    this.http.get('/routes').subscribe(response => {
-      console.log(response);
-    });
-  }
+  
 }
