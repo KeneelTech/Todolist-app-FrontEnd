@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from "./../../models/Todo"
 
+
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
@@ -46,4 +47,7 @@ deleteTodo (id:number) {
 
     this.inputTodo ="";
   }
+
+  
+
 }
