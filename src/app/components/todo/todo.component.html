@@ -1,5 +1,5 @@
 <div class="todos">
-    <form (submit)="addTodo()">
+    <form (submit)="addTask()">
         <input 
         type="text"
         name="inputTodo"
@@ -16,8 +16,8 @@
 </div>
 <div class="todos" *ngFor="let todo of todos; let i =index;" class="todo{{ (todo.completed ? 'done' : '')}}">
         <div class="id">{{ i }}</div>
-        <div class="content" (click)="toggleDone(i)">{{ todo.content }}</div>
-        <button class="delete" (click)="deleteTodo(i)">Remove</button>
+        <div class="content" (click)="toggleDone(i)">{{ todo.task }}</div>
+        <button class="delete" (click)="deleteTask(i)">Remove</button>
     </div>
 
 
