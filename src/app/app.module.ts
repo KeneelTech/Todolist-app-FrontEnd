@@ -34,38 +34,4 @@ export class Myrequest {
 
 constructor(private http: HttpClient){}
 
-index(){
-  return this.http.get('/tasks');
-}
-
-addTask(data: any){
-  return this.http.post('/tasks/addTask', data);
-}
-
-showTask(){
-  return this.http.get('/tasks/:id');
-}
-
-edit(data: any){
-  this.http.put('/tasks/edit/:id', data).subscribe(
-  response => {
-    console.log('Edit request successful:', response);
-  },
-  error => {
-    console.error('Error making edit request:', error);
-  }
-);
-}
-
-deleteTask(){
-  this.http.delete('/tasks/deleteTask/:id').subscribe(
-  response => {
-    console.log('DELETE request successful:', response);
-  },
-  error => {
-    console.error('Error making DELETE request:', error);
-  }
-);
-}
-
 }
