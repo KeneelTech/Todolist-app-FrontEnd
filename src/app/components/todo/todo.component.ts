@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Todo } from "./../../models/Todo"
-
+import { Task } from "./../../models/Task"
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-todo',
@@ -9,26 +9,23 @@ import { Todo } from "./../../models/Todo"
 })
 export class TodoComponent implements OnInit{
 
-  todos!: Todo[];
+  Task!:any;
+  todos!: any;
   inputTodo: string = "";
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
 
   ngOnInit(): void {
-      this.todos = [
-        {
-          content:'first task',
-          completed: false
-        },
-        {
-          content:'second task',
-          completed: false
+      this.index().subscribe(
+        { next:resp => this.todos=resp,
+          complete:()=> console.log(this.todos)
         }
-      ]
+
+      );
   }
 
   toggleDone (id:number) {
-    this.todos.map((v, i) =>{
+    this.todos.map((v: { completed: boolean; }, i: number) =>{
       if(i == id) v.completed = !v.completed;
 
       return v;
@@ -36,7 +33,7 @@ export class TodoComponent implements OnInit{
   }
 
 deleteTodo (id:number) {
-  this.todos = this.todos.filter((v,i) => i !==id);
+  this.todos = this.todos.filter((v: any,i: number) => i !==id);
 }
 
   addTodo () {
@@ -48,6 +45,30 @@ deleteTodo (id:number) {
     this.inputTodo ="";
   }
 
+  index(){
+    return this.http.get('http://localhost:9000/tasks')
+  }
   
+  addTask(){
+    return this.http.post('http://localhost:9000/tasks/addTask', {Task.title }).subscribe({
+      error: err => console.error(err)
+    });
+  }
+  
+  showTask(){
+    return this.http.get('http://localhost:9000/tasks/:id');
+  }
+  
+  edit(data: any){
+    this.http.put('http://localhost:9000/tasks/edit/:id', data).subscribe({
+      error: err => console.error(err)
+    });
+  }
+  
+  deleteTask(data: any){
+    this.http.delete('http://localhost:9000/tasks/deleteTask/' +data).subscribe({
+      error: err => console.error(err)
+    });
+  }
 
 }
