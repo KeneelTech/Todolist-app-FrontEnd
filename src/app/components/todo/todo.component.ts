@@ -55,10 +55,8 @@ deleteTodo (id:number) {
   }
   
   addTask(){
+    location.reload();
     return this.http.post('http://localhost:9000/tasks/addTask', { task: this.inputTodo }).subscribe({
-      complete: () =>{
-        location.reload()
-      },
       error: err => console.error(err)
     });
   }
@@ -75,6 +73,7 @@ deleteTodo (id:number) {
   }
   
   deleteTask(todo: any){
+    location.reload();
     const id = todo.id;
     this.http.delete(`http://localhost:9000/tasks/deleteTask/${id}`).subscribe({
       error: err => console.error(err)
