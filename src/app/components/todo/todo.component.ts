@@ -2,16 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { Task } from "./../../models/Task"
 import { HttpClient } from '@angular/common/http';
 
+
 @Component({
-  selector: 'app-todo',
+  selector: 'app-todo, app-checkbox',
   templateUrl: './todo.component.html',
-  styleUrls: ['./todo.component.css']
+  styleUrls: ['./todo.component.css'],
+  template: `
+  <input type="checkbox" [(ngModel)]="isChecked" (change)="toggleCheckbox()"> Check me
+`,
 })
 export class TodoComponent implements OnInit{
 
   Task!:any;
   todos!: any;
-  inputTodo: string = "";
+  inputTodo: any;
+  isCheck=false;
   constructor(private http: HttpClient) { }
 
 
@@ -50,7 +55,10 @@ deleteTodo (id:number) {
   }
   
   addTask(){
-    return this.http.post('http://localhost:9000/tasks/addTask', {Task.title }).subscribe({
+    return this.http.post('http://localhost:9000/tasks/addTask', { task: this.inputTodo }).subscribe({
+      complete: () =>{
+        location.reload()
+      },
       error: err => console.error(err)
     });
   }
@@ -59,16 +67,22 @@ deleteTodo (id:number) {
     return this.http.get('http://localhost:9000/tasks/:id');
   }
   
-  edit(data: any){
-    this.http.put('http://localhost:9000/tasks/edit/:id', data).subscribe({
+  edit(todo: any){
+    const id = todo.id
+    this.http.put(`http://localhost:9000/tasks/edit/${id}`, {task: this.inputTodo}).subscribe({
       error: err => console.error(err)
     });
   }
   
-  deleteTask(data: any){
-    this.http.delete('http://localhost:9000/tasks/deleteTask/' +data).subscribe({
+  deleteTask(todo: any){
+    const id = todo.id;
+    this.http.delete(`http://localhost:9000/tasks/deleteTask/${id}`).subscribe({
       error: err => console.error(err)
     });
+  }
+
+  toggleCheckbox() {
+    this.isCheck = !this.isCheck;
   }
 
 }
