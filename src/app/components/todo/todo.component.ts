@@ -66,6 +66,7 @@ deleteTodo (id:number) {
   }
   
   edit(todo: any){
+    location.reload();
     const id = todo.id
     this.http.put(`http://localhost:9000/tasks/edit/${id}`, {task: this.inputTodo}).subscribe({
       error: err => console.error(err)
