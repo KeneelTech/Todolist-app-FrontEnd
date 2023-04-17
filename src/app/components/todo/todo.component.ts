@@ -4,19 +4,16 @@ import { HttpClient } from '@angular/common/http';
 
 
 @Component({
-  selector: 'app-todo, app-checkbox',
+  selector: 'app-todo ',
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.css'],
-  template: `
-  <input type="checkbox" [(ngModel)]="isChecked" (change)="toggleCheckbox()"> Check me
-`,
+  
 })
 export class TodoComponent implements OnInit{
 
   Task!:any;
   todos!: any;
   inputTodo: any;
-  isCheck=false;
   constructor(private http: HttpClient) { }
 
 
@@ -80,9 +77,4 @@ deleteTodo (id:number) {
       error: err => console.error(err)
     });
   }
-
-  toggleCheckbox() {
-    this.isCheck = !this.isCheck;
-  }
-
 }
