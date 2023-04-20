@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 
 @Component({
-  selector: 'app-todo ',
+  selector: 'app-todo',
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.css'],
   
