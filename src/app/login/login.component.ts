@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 
@@ -16,20 +16,43 @@ export class LoginComponent {
     constructor(private http: HttpClient, private router: Router) { }
 
 
+    ngOnInit() {
+      if (localStorage.getItem("token")) {
+        this.router.navigate(['tasks']);
+      }
+    }
     
 
     login(){
         const credentials = { username: this.username, password: this.password };
-        this.http.post('http://localhost:9000/login', credentials).subscribe(
-          (response: any) => {
-            localStorage.setItem('token', response.token); // store JWT token in local storage
-            this.router.navigate(['http://localhost:9000/tasks']); // redirect to Todo list page
+        this.http.post('http://localhost:9000/login', credentials)
+          .subscribe({
+          next: (response: any) => {
+            localStorage.setItem('token', response.token); 
+            this.router.navigate(['tasks']); 
           },
-          (error: any) => {
+          error: (error: any) => {
             console.log(error);
           }
-        );
+        });
       }
+
+
+
+      signup() {
+        const credentials = { username: this.username, password: this.password };
+        this.http.post('http://localhost:9000/signup', credentials)
+          .subscribe({
+          next: (response: any) => {
+            localStorage.setItem('token', response.token); 
+            this.router.navigate(['http://localhost:9000/tasks']); 
+          },
+          error: (error: any) => {
+            console.log(error);
+          }
+        });
+      }
+      
 
 }
 
