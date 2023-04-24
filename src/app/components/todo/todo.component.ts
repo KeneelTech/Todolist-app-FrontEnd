@@ -1,20 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from "./../../models/Task"
 import { HttpClient } from '@angular/common/http';
-
+import { Router } from '@angular/router';
+import { AuthGuard } from 'src/app/auth-guard.service';
 
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.css'],
-  
+  providers: [AuthGuard]
 })
 export class TodoComponent implements OnInit{
 
   Task!:any;
   todos!: any;
   inputTodo: any;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
 
   ngOnInit(): void {
@@ -22,8 +23,8 @@ export class TodoComponent implements OnInit{
         { next:resp => this.todos=resp,
           complete:()=> console.log(this.todos)
         }
-
       );
+
   }
 
   toggleDone (id:number) {
@@ -34,9 +35,9 @@ export class TodoComponent implements OnInit{
     })
   }
 
-deleteTodo (id:number) {
+  deleteTodo (id:number) {
   this.todos = this.todos.filter((v: any,i: number) => i !==id);
-}
+  }
 
   addTodo () {
     this.todos.push({
@@ -77,4 +78,15 @@ deleteTodo (id:number) {
       error: err => console.error(err)
     });
   }
+
+
+  signOut() {
+    localStorage.clear();
+    this.router.navigate(['/login']);
+    
+  }
+
+
+
+
 }
