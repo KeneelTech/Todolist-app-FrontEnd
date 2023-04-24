@@ -1,0 +1,12 @@
+<h1>Sign up</h1>
+<div>
+    <label>Username:</label>
+    <input type="text" [(ngModel)]="username" name="username">
+  </div>
+  <div>
+    <label>Password:</label>
+    <input type="text" [(ngModel)]="password" name="password">
+  </div>
+  <button type="submit" (click)="SignUp()">Sign up</button>
+  <button (click)="return()">Go Back To Login Page</button>
+
