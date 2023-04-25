@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
-
+import { CookieService } from "ngx-cookie-service";
 
 @Component({
     selector: 'login',
@@ -14,7 +14,7 @@ export class LoginComponent {
     password: any;
     
 
-    constructor(private http: HttpClient, private router: Router) { }
+    constructor(private http: HttpClient, private router: Router, private cookieservice: CookieService) { }
 
 
 
@@ -23,7 +23,8 @@ export class LoginComponent {
         this.http.post('http://localhost:9000/login', credentials)
           .subscribe({
           next: (response: any) => {
-            localStorage.setItem('token', response.token); 
+            console.log(response)
+            this.cookieservice.set('jwt', response); 
             this.router.navigate(['tasks']); 
           },
           error: (error: any) => {
