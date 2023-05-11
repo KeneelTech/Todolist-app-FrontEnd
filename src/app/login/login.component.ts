@@ -23,11 +23,11 @@ export class LoginComponent {
         this.http.post('http://localhost:9000/login', credentials)
           .subscribe({
           next: (response: any) => {
-            console.log(response)
             this.cookieservice.set('jwt', response); 
             this.router.navigate(['tasks']); 
           },
           error: (error: any) => {
+            alert('Invalid username/password')
             console.log(error);
           }
         });
