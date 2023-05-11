@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Task } from "./../../models/Task"
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthGuard } from 'src/app/auth-guard.service';
@@ -55,7 +54,7 @@ export class TodoComponent implements OnInit{
   addTask(){
     location.reload();
     return this.http.post('http://localhost:9000/tasks/addTask', { task: this.inputTodo }).subscribe({
-      error: err => console.error(err)
+      error: err => console.error(err),
     });
   }
   
@@ -81,6 +80,7 @@ export class TodoComponent implements OnInit{
 
 
   signOut() {
+    document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     localStorage.clear();
     this.router.navigate(['/login']);
     
