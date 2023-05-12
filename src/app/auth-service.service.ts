@@ -39,7 +39,6 @@ export class AuthServiceService {
                 const uniqueId = await firstValueFrom(
                   this.getUniqueId(userName)
                 );
-                console.log(uniqueId);
                 if(uniqueId === decodedToken.UniqueId){
                   return !isExpired;
                 }
