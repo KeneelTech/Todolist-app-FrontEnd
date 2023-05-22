@@ -57,34 +57,3 @@
     font-weight: 700;
 }
 
-.editer{
-    background-color: #4beb0c;
-    margin-left: 8px;
-}
-
-.deleter{
-    background-color: aqua;
-}
-
-.check{
-    margin-left: 10px;
-}
-
-.check input{
-    order: 2;
-    margin-left: 10px;
-}
-
-.check label{
-    order: 1;
-}
-
-.signOut{
-    width: 10%;
-    height: 50px;
-    max-width: 100px;
-    background-color: red;
-    position: absolute;
-    top: 70px;
-    right: 40px;
-}
