@@ -33,5 +33,3 @@ describe('AppComponent', () => {
     expect(compiled.querySelector('.content span')?.textContent).toContain('TodoList-app app is running!');
   });
 });
-
-
